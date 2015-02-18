@@ -1,0 +1,158 @@
+
+/* Layout style of structural elements like header, footer or navigation  */ 
+
+
+.container {
+	@include container($large);
+	padding-left: gutter()*2;
+	padding-right: gutter()*2;
+	p {
+		font-size: 1.4rem;
+	}
+}
+.row {
+	@include clearfix();
+	margin-bottom: gutter()*2;
+}
+nav {
+	background: #f2f2f2;
+	position: relative;
+	min-height: 47px;
+	border-bottom: 1px solid #ccc;
+	.home {
+		font-size: 30px;
+		position: absolute;
+		top: 8px;
+	}
+	.hamburger {
+		font-size: 2em;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		display: block;
+		@include breakpoint($medium){
+			display: none;
+		}
+	}
+	ul.main-nav {
+		transition: right 0.3s ease-in-out;
+		font-size: 0px;
+	}
+	ul {
+		
+		padding: 0px;
+		width: 90%;
+		background: #444;
+		position: fixed;
+		right: -999px;
+		top: 47px;
+		margin: 0px;
+		max-height: 400px;
+		overflow-y: scroll;	
+		li {
+			list-style-type: none;
+			a {
+				font-size: 1.4rem;
+				text-decoration: none;
+				color: #f9f9f9;
+				padding: 15px 15px;
+				display: block;
+				&:hover {
+					background: #ccc;
+					color: #000;
+				}
+			}
+			.dropdown-content {
+				width: 100%;
+				background: #777;
+				max-height : 0px;
+				position: static;
+				overflow : hidden;
+				-webkit-transition: max-height 0.3s;
+				-moz-transition: max-height 0.3s;
+				transition: max-height 0.3s;
+			}
+			&.active {
+				.dropdown-content {
+					max-height : 500px;
+				}
+				a {
+					.fa-caret-right:before {
+						content: "\f0d7";
+					}
+				}
+			}
+		}
+		&.show {
+			right: 0px;
+		}
+	}
+	/*for tablet*/
+	@include breakpoint($small){
+		ul {
+			width: 50%;
+		}
+	}
+	/*for desktop*/
+	
+	@include breakpoint($medium){
+		.fa-caret-right:before {
+			content: "\f0dd";
+		}
+		ul.main-nav {
+			padding-left: 40px;
+		}
+		ul
+		{
+			overflow: inherit;
+			width: auto;
+			position: static;
+			background: #f2f2f2;
+			li {
+			display: inline-block;
+			position: relative;
+				a {
+					border-right: 1px solid #ccc;
+					color: #000;
+					&:hover {
+						background: #fff;
+					}
+				}
+				&.active {
+					background: #ccc;
+					color: #000;
+					.dropdown {
+						font-weight: normal;
+					}
+					a {
+						color: #000;
+						.fa-caret-right:before {
+							content: "\f0dd";
+						}	
+					}
+					a:hover {
+						background: #ccc;
+					}
+				}
+				.dropdown-content {
+						position: absolute;
+						left: -1px;
+						background: #ccc;
+						width: 200px;
+						li {
+							display: block;
+							a {
+								border-bottom: 1px solid #f1f1f1;
+								color: #000;
+								&:hover {
+									background: #b2b2b2;
+								}
+							}
+						}
+					}
+			}
+		}
+	}
+}
+
+
